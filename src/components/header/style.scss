@@ -1,0 +1,15 @@
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    p {
+        color: #0FFCBE;
+        font-weight: 700;
+    }
+    button {
+        background-color: #0FFCBE;
+        color: #106EBE;
+        font-weight: 700;
+    }
+}
