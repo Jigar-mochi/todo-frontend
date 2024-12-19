@@ -3,8 +3,6 @@ import { Navigate } from 'react-router-dom';
 
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
     const token = localStorage.getItem('accessToken');
-    console.log('PublicRoute', PublicRoute);
-    
 
     if (token) {
         return <Navigate to="/" replace />;

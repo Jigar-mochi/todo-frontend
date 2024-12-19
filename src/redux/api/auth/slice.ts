@@ -25,12 +25,10 @@ const authSlice = createSlice({
             })
             .addCase(handleRegister.fulfilled, (state, action: PayloadAction<any>) => {
                 state.loading = false;
-                console.log('token', action.payload);
                 localStorage.setItem('accessToken', action.payload.data.authToken);
             })
             .addCase(handleRegister.rejected, (state, action) => {
                 state.loading = false;
-                console.log('handleRegister action.payload', action.payload);
                 toast.error(JSON.stringify(action.payload) || 'Something went wrong');
             })
             .addCase(handleLogin.pending, (state) => {
@@ -38,12 +36,10 @@ const authSlice = createSlice({
             })
             .addCase(handleLogin.fulfilled, (state, action: PayloadAction<any>) => {
                 state.loading = false;
-                console.log('token', action.payload.data.authToken);
                 localStorage.setItem('accessToken', action.payload.data.authToken);
             })
             .addCase(handleLogin.rejected, (state, action) => {
                 state.loading = false;
-                console.log('handleLogin action.payload', action.payload);
                 toast.error(JSON.stringify(action.payload) || 'Something went wrong', {});
             });
     },

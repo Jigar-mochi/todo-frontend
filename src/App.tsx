@@ -1,11 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
+import { Bounce, ToastContainer } from 'react-toastify';
 import Register from './pages/register';
 import SignIn from './pages/signIn';
 import ToDoPage from './pages/home';
 import PrivateRoute from './components/authGuard/privateRoute';
 import PublicRoute from './components/authGuard/publicRoute';
-import { Bounce, ToastContainer } from 'react-toastify';
+import './App.css';
 
 function App() {
 
@@ -15,11 +15,11 @@ function App() {
             element: (<PrivateRoute><ToDoPage /></PrivateRoute>),
         },
         {
-            path: 'signIn',
+            path: '/signIn',
             element: <PublicRoute><SignIn /></PublicRoute>,
         },
         {
-            path: 'register',
+            path: '/register',
             element: <PublicRoute><Register /></PublicRoute>,
         },
     ]);

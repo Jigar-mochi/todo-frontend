@@ -1,18 +1,20 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { FloatLabel } from 'primereact/floatlabel';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { AppDispatch, RootState } from '../../redux/store';
+import { handleLogin } from '../../redux/api/auth/thunk';
 import { userLoginSchema } from '../../utils/validation';
 import { UserLoginTypes } from './modals';
 import './style.scss';
-import { AppDispatch, RootState } from '../../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { handleLogin } from '../../redux/api/auth/thunk';
 
 const SignIn = () => {
     const { loading } = useSelector((state: RootState) => state.auth);
     const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleFormSubmit = (values: UserLoginTypes) => {
         dispatch(handleLogin({ body: values, callBack: handleCallBack }));
@@ -20,6 +22,7 @@ const SignIn = () => {
 
     const handleCallBack = (token: string) => {
         localStorage.setItem('accessToken', token);
+        navigate('/');
     };
 
     const { handleSubmit, touched, errors, values, handleChange } = useFormik({
@@ -52,7 +55,7 @@ const SignIn = () => {
                             {errors.password}
                         </small>}
                     </div>
-                    <Button icon="pi pi-check" label="Submit" loading={loading} />
+                    <Button type='submit' icon="pi pi-check" label="Submit" loading={loading} />
                 </form>
             </Card>
         </div>
