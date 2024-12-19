@@ -9,6 +9,7 @@ interface AddNoteParams {
         title: string;
         description: string;
     };
+    id?: string;
     callBack: () => void;
 }
 
@@ -18,6 +19,20 @@ export const handleAddNote = createAsyncThunk(
         try {
             const response = await axiosInstance.post(`${API_URL}/notes`, params.body);
             if (response.status === 201 && params.callBack) {
+                params.callBack();
+            }
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data.message as string);
+        }
+    }
+);
+export const EditNote = createAsyncThunk(
+    'EditNote',
+    async (params: AddNoteParams, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.put(`${API_URL}/notes/${params.id}`, params.body);
+            if (response.status === 200 && params.callBack) {
                 params.callBack();
             }
             return response.data;

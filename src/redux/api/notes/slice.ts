@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { handleAddNote, handleDeleteNote, handleFetchNotes } from './thunk';
+import { EditNote, handleAddNote, handleDeleteNote, handleFetchNotes } from './thunk';
 
 interface NotesInitialState {
     error: string;
@@ -50,6 +50,16 @@ const notesSlice = createSlice({
                 state.loading = false;
             })
             .addCase(handleDeleteNote.rejected, (state, action) => {
+                state.loading = false;
+                toast.error(JSON.stringify(action.payload) || 'Something went wrong');
+            })
+            .addCase(EditNote.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(EditNote.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(EditNote.rejected, (state, action) => {
                 state.loading = false;
                 toast.error(JSON.stringify(action.payload) || 'Something went wrong');
             });
