@@ -1,18 +1,29 @@
+@import '../../variable.scss';
+
 .todo-container {
-    background-color: #106EBE;
-    height: 100dvh;
+    background-color: $primary-color;
+    min-height: 100dvh;
     width: 100%;
+
+    .todo-section-wrapper {
+        padding: 20px;
+    }
 
     .todo-input-wrapper {
         display: flex;
         flex-direction: column;
         gap: 20px;
+
         input {
             width: 100%;
         }
 
         textArea {
             width: 100%;
+        }
+        button {
+            background-color: $secondary-color;
+            color: $primary-color;
         }
     }
 
@@ -23,7 +34,7 @@
         gap: 20px;
 
         .notes-wrapper {
-            background-color: #0FFCBE;
+            background-color: $secondary-color;
 
             .p-card-content {
                 padding: 0;
@@ -32,6 +43,7 @@
             h3,
             p {
                 margin: 0;
+                color: $primary-color;
             }
 
             h3 {

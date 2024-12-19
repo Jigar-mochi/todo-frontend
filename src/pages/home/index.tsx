@@ -43,7 +43,7 @@ const ToDoPage = () => {
     return (
         <div className='todo-container'>
             <Header />
-            <Card>
+            <div className='todo-section-wrapper'>
                 <div className='todo-input-wrapper'>
                     <InputText type="text" placeholder="Add title here..." value={note} onChange={handleChangeTodo} />
                     <InputTextarea placeholder="Add description here..." value={desc} onChange={handleChangeDesc} rows={5} cols={30} />
@@ -59,7 +59,7 @@ const ToDoPage = () => {
                         })
                     }
                 </div>
-            </Card>
+            </div>
         </div>
     );
 };
