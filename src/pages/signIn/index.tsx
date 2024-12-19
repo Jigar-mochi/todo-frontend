@@ -20,8 +20,7 @@ const SignIn = () => {
         dispatch(handleLogin({ body: values, callBack: handleCallBack }));
     };
 
-    const handleCallBack = (token: string) => {
-        localStorage.setItem('accessToken', token);
+    const handleCallBack = () => {
         navigate('/');
     };
 

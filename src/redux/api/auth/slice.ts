@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 interface AuthInitialState {
     error: string;
     loading: boolean;
+    userDetails: any;
 }
 
 const initialState: AuthInitialState = {
     error: '',
-    loading: false
+    loading: false,
+    userDetails: null
 };
 
 const authSlice = createSlice({
@@ -25,6 +27,7 @@ const authSlice = createSlice({
             })
             .addCase(handleRegister.fulfilled, (state, action: PayloadAction<any>) => {
                 state.loading = false;
+                state.userDetails = action.payload.data.user;
                 localStorage.setItem('accessToken', action.payload.data.authToken);
             })
             .addCase(handleRegister.rejected, (state, action) => {
@@ -36,6 +39,7 @@ const authSlice = createSlice({
             })
             .addCase(handleLogin.fulfilled, (state, action: PayloadAction<any>) => {
                 state.loading = false;
+                state.userDetails = action.payload.data.user;
                 localStorage.setItem('accessToken', action.payload.data.authToken);
             })
             .addCase(handleLogin.rejected, (state, action) => {

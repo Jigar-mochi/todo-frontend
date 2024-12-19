@@ -46,7 +46,6 @@ export const handleLogin = createAsyncThunk(
             const response = await axios.post(`${API_URL}/users/login`, params.body);
             if (response.status === 200 && params.callBack) {
                 params.callBack(response.data.data.accessToken);
-                return;
             }
             return response.data;
         } catch (error: any) {
