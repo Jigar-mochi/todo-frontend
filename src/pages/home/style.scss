@@ -21,6 +21,7 @@
         textArea {
             width: 100%;
         }
+
         button {
             background-color: $secondary-color;
             color: $primary-color;
@@ -35,6 +36,22 @@
 
         .notes-wrapper {
             background-color: $secondary-color;
+
+            .title-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .icons-wrapper {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                i {
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                }
+            }
 
             .p-card-content {
                 padding: 0;

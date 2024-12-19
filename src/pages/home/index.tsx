@@ -6,7 +6,8 @@ import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
 import Header from '../../components/header';
 import { AppDispatch, RootState } from '../../redux/store';
-import { handleAddNote, handleFetchNotes } from '../../redux/api/notes/thunk';
+import { handleAddNote, handleDeleteNote, handleFetchNotes } from '../../redux/api/notes/thunk';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import './style.scss';
 
 const ToDoPage = () => {
@@ -40,6 +41,21 @@ const ToDoPage = () => {
         setDesc(e.target.value);
     };
 
+    const accept = (id: string) => {
+        dispatch(handleDeleteNote({ id, callBack: handleCallBack }));
+    };
+
+    const confirmDelete = (id: string) => {
+        confirmDialog({
+            message: 'Are you sure you want to delete this note?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
+            acceptClassName: 'p-button-danger',
+            accept: () => accept(id),
+        });
+    };
+
     return (
         <div className='todo-container'>
             <Header />
@@ -53,13 +69,20 @@ const ToDoPage = () => {
                     {Array.isArray(notesListing) && notesListing.length > 0 &&
                         notesListing.map((ele) => {
                             return <Card className='notes-wrapper'>
-                                <h3>{ele.title}</h3>
+                                <div className='title-wrapper'>
+                                    <h3>{ele.title}</h3>
+                                    <div className='icons-wrapper'>
+                                        <i className="pi pi-file-edit" ></i>
+                                        <i className="pi pi-times" onClick={() => confirmDelete(ele._id)}></i>
+                                    </div>
+                                </div>
                                 <p>{ele.description}</p>
                             </Card>;
                         })
                     }
                 </div>
             </div>
+            <ConfirmDialog />
         </div>
     );
 };

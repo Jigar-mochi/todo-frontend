@@ -37,3 +37,22 @@ export const handleFetchNotes = createAsyncThunk(
         }
     }
 );
+
+interface DeleteNoteParams {
+    id: string
+    callBack: () => void;
+}
+export const handleDeleteNote = createAsyncThunk(
+    'handleDeleteNote',
+    async (params: DeleteNoteParams, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.delete(`${API_URL}/notes/${params.id}`);
+            if (response.status === 200 && params.callBack) {
+                params.callBack();
+            }
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data.message as string);
+        }
+    }
+);
